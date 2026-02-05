@@ -1,0 +1,59 @@
+/* Container for the card */
+.customer-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb; /* Light border for structure */
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 320px; /* Limits width for card look */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 10px;
+  
+}
+
+/* Hover effect for the card */
+.customer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Customer Name - Primary Color */
+.customer-name {
+  color: #111827; /* Dark Navy */
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+/* Customer Details - Secondary Color */
+.customer-phone,
+.customer-address {
+  color: #6b7280; /* Cool Gray */
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+/* Button Styling */
+.customer-card button {
+  background-color: #111827; /* Dark Navy Background */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Button Hover State */
+.customer-card button:hover {
+  background-color: #6b7280; /* Switches to Gray on hover */
+}

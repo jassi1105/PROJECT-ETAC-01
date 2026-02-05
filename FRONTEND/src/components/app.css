@@ -1,0 +1,518 @@
+/* =========================================
+   GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+  /* Color Palette */
+  --ink-dark: #111827;       /* Main text, Primary Buttons */
+  --ink-gray: #6b7280;       /* Secondary text, Borders */
+  --ink-light: #9ca3af;      /* Placeholders */
+  
+  /* Backgrounds */
+  --bg-white: #ffffff;
+  --bg-surface: #f9fafb;     /* Light grey for cards/columns */
+  
+  /* Borders & Dividers */
+  --border-light: #e5e7eb;
+  --border-focus: #000000;
+  
+  /* Dimensions & Shadows */
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+
+  /* Fonts */
+  --font-family: Arial, sans-serif;
+}
+
+/* Optional: Global Box Sizing for layout sanity */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   1. DASHBOARD TOP BOARD
+   ========================================= */
+
+.dashboard-board {
+  width: 100%;
+  height: 175px;
+  padding: 20px 28px;
+  background: var(--bg-white);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-family);
+}
+
+/* --- Project Title --- */
+.dashboard-project-title {
+  width: 200px;
+  line-height: 1.2;
+}
+
+.dashboard-project-title1 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink-gray);
+  letter-spacing: 2px;
+}
+
+.dashboard-project-title2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin-top: 6px;
+  letter-spacing: 2px;
+}
+
+/* --- Search & Stats --- */
+.dashboard-search-stats {
+  flex: 1;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box {
+  width: 655px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid #797979;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.25s ease;
+  margin-bottom: 8px;
+}
+
+.search-box::placeholder {
+  color: var(--ink-light);
+}
+
+.search-box:focus {
+  border-color: var(--border-focus);
+}
+
+/* --- Stat Cards --- */
+.board-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  padding: 8px 14px;
+  border-radius: 12px;
+  min-width: 155px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px var(--border-light);
+}
+
+.stat-card p {
+  font-size: 0.7rem;
+  color: var(--ink-gray);
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.stat-card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink-dark);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* --- User Details --- */
+.user-details {
+  width: 220px;
+  text-align: right;
+  line-height: 1.2;
+  padding-right: 25px;
+}
+
+.user-name {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--ink-dark);
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: var(--ink-gray);
+  margin-top: 4px;
+  word-break: break-all;
+}
+
+/* --- Logout Button --- */
+.dashboard-logout-btn {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap:15px;
+}
+
+.dashboard-logout-btn button,
+.btn--primary {
+  padding: 7px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--ink-dark);
+  color: var(--bg-white);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dashboard-logout-btn button:hover,
+.btn--primary:hover {
+  background: #3a3a3a; /* Slight lighten for hover state */
+}
+
+/* =========================================
+   2. CUSTOMER COMPONENT CARD
+   ========================================= */
+
+.customer-card {
+  width: 280px;
+  height: 150px;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-family);
+  text-transform: uppercase;
+}
+
+.customer-name {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 550;
+  color: var(--ink-dark);
+}
+
+.customer-phone,
+.customer-address {
+  font-size: 20px;
+  color: var(--ink-gray);
+  margin: 5px 0;
+}
+
+/* =========================================
+   3. CUSTOMER IN DETAIL (MODAL)
+   ========================================= */
+
+/* --- Overlay --- */
+.customer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* --- Modal Window --- */
+.customer-modal {
+  background: var(--bg-white);
+  width: 100%;
+  max-width: 950px;
+  height: 85vh;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  color: var(--ink-dark);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-family);
+}
+
+/* --- Close Button --- */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--ink-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  border-color: var(--ink-dark);
+  color: var(--ink-dark);
+}
+
+/* --- Modal Header --- */
+.customer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.customer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.customer-details h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin: 0;
+}
+
+.customer-details h2 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-gray);
+  margin: 0;
+}
+
+/* --- Remaining Amount Block --- */
+.customer-remaining-block {
+  background: var(--bg-surface);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  text-align: right;
+  border: 1px solid var(--border-light);
+  min-width: 180px;
+  margin-right: 40px;
+}
+
+.customer-remaining-block p {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--ink-gray);
+  text-transform: uppercase;
+}
+
+.customer-remaining-block h1 {
+  margin: 4px 0 0 0;
+  font-size: 26px;
+  color: var(--ink-dark);
+  text-align: center;
+}
+
+/* --- Columns Layout --- */
+.customer-columns {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+.column-card {
+  flex: 1;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-light);
+}
+
+.column-header h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-dark);
+}
+
+/* --- Scrollable Table --- */
+.table-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 6px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.table-scroll-area::-webkit-scrollbar { width: 6px; }
+.table-scroll-area::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 10px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--bg-surface);
+  color: var(--ink-dark);
+}
+
+/* --- Action Area --- */
+.action-area {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-field {
+  flex: 1;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+  color: var(--ink-dark);
+  outline: none;
+  background: var(--bg-white);
+  transition: border-color 0.2s;
+}
+
+.input-field::placeholder {
+  color: var(--ink-gray);
+}
+
+.input-field:focus {
+  border-color: var(--ink-dark);
+}
+
+/* --- Buttons (Modal Specific) --- */
+.btn-primary {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: var(--ink-dark);
+  color: var(--bg-white);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-delete {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px dashed var(--ink-gray);
+  color: var(--ink-gray);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-delete:hover {
+  border-style: solid;
+  border-color: var(--ink-dark);
+  color: var(--ink-dark);
+  background: #f3f4f6;
+}
+
+/* --- Totals Block --- */
+.total-block {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  text-align: center;
+  border: 1px solid var(--border-light);
+}
+
+.total-block span {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.total-block h1 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--ink-dark);
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 768px) {
+  .customer-modal {
+    height: 100%;
+    border-radius: 0;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .customer-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .customer-remaining-block {
+    width: 100%;
+    text-align: left;
+    margin-right: 0;
+  }
+
+  .customer-columns {
+    flex-direction: column;
+    display: block;
+  }
+
+  .column-card {
+    margin-bottom: 24px;
+    height: auto;
+    min-height: 400px;
+  }
+}

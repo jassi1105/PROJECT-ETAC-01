@@ -1,0 +1,198 @@
+/* 
+   ----------BASE------------
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* 
+   ---------LAYOUT------------
+*/
+.layout-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/*
+  ---------HERO----------
+ */
+.hero {
+  text-align: center;
+  max-width: 1000px;
+}
+
+.hero-title {
+  letter-spacing: 2px;
+}
+
+.user-details-project-title1 {
+  font-size: 4rem;
+  font-weight: 300;
+  color: #6b7280;
+  letter-spacing: 2px;
+}
+
+.user-details-project-title2 {
+  font-size: 4.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 6px;
+  letter-spacing: 2px;
+}
+
+.hero-subtitle {
+  margin-top: 6px;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.hero-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 
+   ---------BUTTONS-----------
+*/
+/* 
+   ---------BUTTONS (ADJUSTED)-----------
+*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 28px;
+  min-height: 42px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  transition: background 0.2s ease,
+              transform 0.15s ease,
+              box-shadow 0.2s ease;
+}
+
+/* Primary Button */
+.btn--primary {
+  background: #111827;
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background: #1f2937;
+  transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.btn--secondary {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+
+.btn--secondary:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+/* Full Width */
+.btn--full {
+  width: 100%;
+}
+
+/* Keyboard Focus (Optional but clean) */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.25);
+}
+
+/*
+   ---------AUTH CARD-------
+*/
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05);
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 28px;
+}
+
+.auth-field {
+  margin-bottom: 18px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #111827;
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.15);
+}
+
+/*
+   --------ALERTS---------
+*/
+.alert {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.alert--success {
+  background: #16a34a;
+  color: #fff;
+}
+
+/*
+  -----------RESPONSIVE------------
+*/
+@media (max-width: 480px) {
+  .hero-title--light {
+    font-size: 2.8rem;
+    color:#6b7280;
+  }
+
+  .hero-title--bold {
+    font-size: 3.2rem;
+  }
+
+  .auth-card {
+    padding: 32px 24px;
+  }
+}

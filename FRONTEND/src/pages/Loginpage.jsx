@@ -44,7 +44,7 @@ const navigate = useNavigate();
         }
       }
       showSuccess(data.message);
-      setTimeout(() => navigate("/dashboard"), 1000);
+      setTimeout(() => navigate(`/dashboard/${data.user._id.toString()}`), 1000);
       setLogindata(initialLoginState);
 
     } catch (error) {

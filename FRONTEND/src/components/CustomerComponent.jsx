@@ -1,25 +1,28 @@
-import React from 'react'
-import './app.css'
-// import './x.css'
-import CustomerInDetail from './CustomerInDetail'
-import {useState} from 'react'
+import React, { useState } from "react";
+import "./app.css";
+import CustomerInDetail from "./CustomerInDetail";
 
-const CustomerComponent = ({ name, phone, address }) => {
+const CustomerComponent = ({ customer}) => {
   const [showDetails, setShowDetails] = useState(false);
+
   return (
-    <div>
-         <div className="customer-card">
-      <h3 className="customer-name">{name}Tangella Lakshmi sai mouli</h3>
-      <p className="customer-phone">{phone}9347769682</p>
-      <p className="customer-address"> {address}duvvada</p>
-      <button onClick={()=>{setShowDetails(true)}}>show</button>
+    <div className="customer-card">
+      <h3 className="customer-name">{customer?.name}</h3>
+      <p className="customer-phone">{customer?.phone}</p>
+      <p className="customer-address">{customer?.address}</p>
+
+      <button onClick={() => setShowDetails(true)}>
+        Show Details
+      </button>
+
       {showDetails && (
-        <CustomerInDetail onClose={() => setShowDetails(false)} />
+        <CustomerInDetail
+          customer={customer}
+          onClose={() => setShowDetails(false)}
+        />
       )}
     </div>
-      
-    </div>
-  )
-}
+  );
+};
 
-export default CustomerComponent
+export default CustomerComponent;

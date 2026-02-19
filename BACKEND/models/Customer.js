@@ -18,12 +18,19 @@ const customerSchema =new mongoose.Schema({
 
     },
     items: {
-      type: [String], // e.g. ["Rice", "Oil", "Soap"]
+      type: [{
+        itemName: String, // e.g. "Rice"
+        price: Number,    // e.g. 200
+        quantity: Number, // e.g. 1
+      }], // e.g. ["Rice", "Oil", "Soap"]
       default: [],
     },
 
     amount: {
-      type: [Number], // e.g. [200, 150, 80]
+      type: [{
+        paidAmount: Number,      // e.g. 200
+        via: String,             // e.g. "Cash", "Card", "Online"
+      }], // e.g. [200, 150, 80]
       default: [],
     },
 

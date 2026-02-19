@@ -6,9 +6,8 @@ import { showSuccess, showError } from "../toast";
 import { deleteRecentItemService } from "../fetch2";
 import PaymentFormComponent from "./PaymentFormComponent";
 import { deleteRecentPaymentService } from "../fetch2";
-import { send } from "vite";
 
-const CustomerInDetail = ({ onClose,customer}) => {
+const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
   const [customerData, setCustomerData] = useState(customer)
 
 
@@ -50,16 +49,12 @@ const CustomerInDetail = ({ onClose,customer}) => {
       console.error("Error deleting recent payment:", error);
     }
   }
-
-
-
-
-
+// onClick={() => { onClose(); sendthedata(customerData); }}
   return (
-    <div className="customer-overlay" onClick={onClose}>
+    <div className="customer-overlay" onClick={() => { onClose(); sendthedata(customerData); }}>
       <div className="customer-modal" onClick={(e) => e.stopPropagation()}>
         {/* Close */}
-        <button className="close-btn" onClick={onClose}>
+        <button className="close-btn"onClick={() => { onClose(); sendthedata(customerData); }}>
           ✕
         </button>
 

@@ -19,7 +19,7 @@
   --radius-md: 8px;
   --radius-lg: 16px;
   --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.13);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
 
   /* Fonts */
@@ -190,8 +190,8 @@
    ========================================= */
 
 .customer-card {
-  width: 280px;
-  height: 150px;
+   width: 100%;
+  height: 130px;
   padding: 16px;
   border-radius: 10px;
   background: var(--bg-white);
@@ -200,11 +200,18 @@
   text-transform: uppercase;
 }
 
+/* Example hover effect to trigger the transition */
+.customer-card:hover {
+  box-shadow: var(--shadow-md, 0 8px 16px rgba(0,0,0,0.1)); /* Use your medium shadow variable here if you have one */
+}
+
+
 .customer-name {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 550;
   color: var(--ink-dark);
+ 
 }
 
 .customer-phone,

@@ -73,3 +73,17 @@ export const deleteRecentPaymentService=async(customerId)=>{
 
            return {response,data};
 }   
+
+export const getuserdetailsService=async(userid)=>{
+
+    const response=await fetch(`http://localhost:3000/api/users/${userid}`,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            credentials: "include", // VERY IMPORTANT for sessions
+    })
+           const data=await response.json();
+
+           return {response,data};
+}   

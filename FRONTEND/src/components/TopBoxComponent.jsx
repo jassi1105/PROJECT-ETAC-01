@@ -6,16 +6,27 @@ import {logoutService} from "../fetch";
 import { useNavigate } from 'react-router-dom';
 import { showSuccess, showError } from "../toast";
 
-const DashboardTopBoard = ({
-  name,
-  email,
-  totalCount,
-  totalSold,
-  totalReceived,
-  remaining,
-  onSearch,
-  onLogout,
-}) => {
+const DashboardTopBoard = ({data,user}) => {
+    const totalCustomers = data.length;
+
+const totalAmount = data.reduce(
+  (sum, c) => sum + c.customerId.totalAmount,
+  0
+);
+
+const totalPaid = data.reduce(
+  (sum, c) => sum + c.customerId.paidAmount,
+  0
+);
+
+const totalRemaining = data.reduce(
+  (sum, c) => sum + c.customerId.remainingAmount,
+  0
+);
+
+
+
+
     const navigate = useNavigate();
     const [ShowModal,setShowModal]=useState(false)
     const logout = async () => {
@@ -55,30 +66,30 @@ const DashboardTopBoard = ({
              <div className="board-stats">
                 <div className="stat-card">
                     <p>Total Customers</p>
-                    <h2>{totalCount}56</h2>
+                    <h2>{totalCustomers}</h2>
                 </div>
 
                 <div className="stat-card">
                     <p>Total Amount Sold</p>
-                    <h2>₹{totalSold}25678</h2>
+                    <h2>₹{totalAmount}</h2>
                 </div>
 
                 <div className="stat-card">
                     <p>Total Amount Received</p>
-                    <h2>₹{totalReceived}15890</h2>
+                    <h2>₹{totalPaid}</h2>
                 </div>
 
                 <div className="stat-card">
                     <p>Remaining Amount</p>
-                    <h2>₹{remaining}6789</h2>
+                    <h2>₹{totalRemaining}</h2>
                 </div>
             </div>
 
         </div>
 
         <div className="user-details">
-             <h2 className="user-name">{name}Hi, Tangella Jaswanth</h2>
-             <p className="user-email">{email}jassijaswanth360@gmail.com</p>
+             <h2 className="user-name">Hi, {user?.name}</h2>
+             <p className="user-email">{user?.email}</p>
         </div>
 
         <div className="dashboard-logout-btn">

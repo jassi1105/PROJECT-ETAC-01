@@ -2,11 +2,13 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(4px);
+  background: rgba(17, 24, 39,0.1);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
+  padding: 20px;
 }
 
 /* Modal Box */
@@ -16,6 +18,9 @@
   background: #ffffff;
   border-radius: 12px;
   position: relative;
+  border-color: #8c8f96;
+  /* border: #0053f9; */
+  border-style: solid;
 }
 
 /* Title */
@@ -42,6 +47,16 @@
 }
 
 .modal-form input:focus {
+  border-color: #111827;
+}
+.modal-form select {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #6b7280;
+  font-size: 14px;
+  outline: none;
+}
+.modal-form select:focus {
   border-color: #111827;
 }
 

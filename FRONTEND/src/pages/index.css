@@ -179,6 +179,15 @@ body {
   color: #fff;
 }
 
+.customer-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+
+
 /*
   -----------RESPONSIVE------------
 */

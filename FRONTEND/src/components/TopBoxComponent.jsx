@@ -6,24 +6,29 @@ import {logoutService} from "../fetch";
 import { useNavigate } from 'react-router-dom';
 import { showSuccess, showError } from "../toast";
 
-const DashboardTopBoard = ({data,user}) => {
+const DashboardTopBoard = ({data,user,onSendData1}) => {
     const totalCustomers = data.length;
 
-const totalAmount = data.reduce(
-  (sum, c) => sum + c.customerId.totalAmount,
-  0
-);
+const totalAmount = Array.isArray(data)
+  ? data.reduce(
+      (sum, c) => sum + (c?.customerId?.totalAmount || 0),
+      0
+    )
+  : 0;
 
-const totalPaid = data.reduce(
-  (sum, c) => sum + c.customerId.paidAmount,
-  0
-);
+const totalPaid = Array.isArray(data)
+  ? data.reduce(
+      (sum, c) => sum + (c?.customerId?.paidAmount || 0),
+      0
+    )
+  : 0;
 
-const totalRemaining = data.reduce(
-  (sum, c) => sum + c.customerId.remainingAmount,
-  0
-);
-
+const totalRemaining = Array.isArray(data)
+  ? data.reduce(
+      (sum, c) => sum + (c?.customerId?.remainingAmount || 0),
+      0
+    )
+  : 0;
 
 
 
@@ -99,6 +104,7 @@ const totalRemaining = data.reduce(
         {ShowModal && (
         <CustomerFormComponent
           onClose={() => setShowModal(false)}
+          onSendData1={onSendData1}
         />
       )}
 

@@ -7,8 +7,7 @@ import { deleteRecentItemService } from "../fetch2";
 import PaymentFormComponent from "./PaymentFormComponent";
 import { deleteRecentPaymentService } from "../fetch2";
 
-const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
-  const [customerData, setCustomerData] = useState(customer)
+const CustomerInDetail = ({ onClose,customer,onSendData2}) => {
 
 
 
@@ -22,14 +21,14 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
 
   const deleteRecentItem = async () => {
     try {
-      const {response,data} = await deleteRecentItemService(customerData._id);
+      const {response,data} = await deleteRecentItemService(customer._id);
 
       if (!response.ok) {
         showError(data?.error || "Failed to delete recent item");
         return;
       }
       showSuccess("Deleted Recent Item Successfully");
-      setCustomerData(data.customer);
+      onSendData2(data.customer);
     } catch (error) {
       console.error("Error deleting recent item:", error);
     }
@@ -37,38 +36,40 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
 
   const deleteRecentPayment = async () => {
     try{
-      const {response,data}=await deleteRecentPaymentService(customerData._id);
+      const {response,data}=await deleteRecentPaymentService(customer._id);
       if (!response.ok) {
         showError(data?.error || "Failed to delete recent payment");
         return;
       }
       showSuccess("Deleted Recent Payment Successfully");
-      setCustomerData(data.customer);
+      onSendData2(data.customer);
 
     }catch(error){
       console.error("Error deleting recent payment:", error);
     }
   }
-// onClick={() => { onClose(); sendthedata(customerData); }}
+
+
   return (
-    <div className="customer-overlay" onClick={() => { onClose(); sendthedata(customerData); }}>
+
+    <div className="customer-overlay" onClick={onClose}>
       <div className="customer-modal" onClick={(e) => e.stopPropagation()}>
         {/* Close */}
-        <button className="close-btn"onClick={() => { onClose(); sendthedata(customerData); }}>
+        <button className="close-btn" onClick={onClose}>
           ✕
         </button>
 
         {/* Header */}
         <div className="customer-header">
           <div className="customer-details">
-            <h1>{customerData?.name}</h1>
-            <h2>+91 {customerData?.phone}</h2>
-            <h2>{customerData?.address}</h2>
+            <h1>{customer?.name}</h1>
+            <h2>+91 {customer?.phone}</h2>
+            <h2>{customer?.address}</h2>
           </div>
 
           <div className={`customer-remaining-block ${remainingAmount < 0 ? 'negative' : ''}`}>
             <p>AMOUNT RECEIVABLE</p>
-            <h1>{customerData?.remainingAmount}</h1>
+            <h1>{customer?.remainingAmount}</h1>
           </div>
         </div>
 
@@ -93,7 +94,12 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
                  </tr>
                 </thead>   
                 <tbody>
-                  {customerData.items.map((item,index)=>(
+                  {customer?.items.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: "center" }}>No items found.</td>
+                    </tr>
+                  ) : (
+                    customer.items.map((item,index)=>(
                     <tr key={item._id}>
                       <td>{index+1}</td>
                       <td>{item.itemName}</td>
@@ -101,7 +107,9 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
                       <td>{item.quantity}</td>
                       <td>₹{item.price * item.quantity}</td>
                     </tr>
-                  ))}
+                  ))
+                   
+                  )}
                   </tbody>           
                 
                 
@@ -115,7 +123,7 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
 
             <div className="total-block">
               <span>Total Purchased</span>
-              <h1>₹{customerData?.totalAmount}</h1>
+              <h1>₹{customer?.totalAmount}</h1>
             </div>
           </div>
 
@@ -137,13 +145,20 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
 
                 </thead>
                 <tbody>
-                  {customerData.amount.map((amt,index)=>(
+                  {customer?.amount.length === 0 ? (
+                    <tr>
+                      <td colSpan="3" style={{ textAlign: "center" }}>No payments found.</td>
+                    </tr>
+                  ) : ( 
+                      customer.amount.map((amt,index)=>(
                     <tr key={amt._id}>
                       <td>{index+1}</td>
                       <td>₹{amt.paidAmount}</td>
                       <td>{amt.via}</td>
                     </tr>
-                  ))}
+                  ))
+
+                  )} 
                 </tbody>
               </table>
             </div>
@@ -155,7 +170,7 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
 
             <div className="total-block">
               <span>Total Received</span>
-              <h1>₹{customerData.paidAmount}</h1>
+              <h1>₹{customer?.paidAmount}</h1>
             </div>
           </div>
 
@@ -163,11 +178,15 @@ const CustomerInDetail = ({ onClose,customer,sendthedata}) => {
       </div>
 
       {showNewCustomerForm && (
-        <ItemFormComponent onClose={()=>setShowNewCustomerForm(false)} sendData={setCustomerData} data={customerData._id.toString()}/>
+        <ItemFormComponent onClose={()=>setShowNewCustomerForm(false)}
+         onSendData2={onSendData2}
+          data={customer._id.toString()}/>
       )}
 
       {showPaymentForm && (
-        <PaymentFormComponent onClose={()=>setShowPaymentForm(false)} sendData={setCustomerData} data={customerData._id.toString()}/>
+        <PaymentFormComponent onClose={()=>setShowPaymentForm(false)} 
+        onSendData2={onSendData2}
+         data={customer._id.toString()}/>
       )}
 
 

@@ -3,7 +3,7 @@ import "./customerform.css";
 import { addNewCustomerService,assignCustomertoUserService } from "../fetch";
 import { showSuccess, showError } from "../toast";
 
-const CustomerFormComponent = ({ onClose }) => {
+const CustomerFormComponent = ({ onClose,onSendData1 }) => {
   const initialCustomerState = {
     name: "",
     phone: "",
@@ -29,6 +29,7 @@ const CustomerFormComponent = ({ onClose }) => {
         showError(data?.error || "Failed to add customer");
         return;
       }
+      
     const datatosend = {
       customerId: data.customer._id,
       role: "viewer",
@@ -40,9 +41,10 @@ const CustomerFormComponent = ({ onClose }) => {
       showError(assignData?.message || "Customer assignment failed");
       return;
     }
+    
+    showSuccess("Customer added and assigned successfully");
+    onSendData1(assignData.link,data.customer);
 
-    // 3️⃣ Final success
-    showSuccess("Added New Customer Successfully");
     setnewCustomerdata(initialCustomerState);
     setTimeout(()=>{onClose();}, 1000)
     

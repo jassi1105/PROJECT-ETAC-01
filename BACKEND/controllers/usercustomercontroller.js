@@ -35,6 +35,7 @@ const assignCustomerToUser = async (req, res) => {
 
 // Get all customers for a user
 const getCustomersByUser = async (req, res) => {
+  if(!req.session.User_Id) return res.status(401).json({ error: "Unauthorized" });
   try {
     const { userId } = req.params;
 

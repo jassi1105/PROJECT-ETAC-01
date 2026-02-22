@@ -4,7 +4,7 @@ import {useState} from "react"
 import {addNewItemService} from "../fetch2";
 import { showSuccess, showError } from "../toast";
 
-const ItemFormComponent = ({onClose,data,sendData}) => {
+const ItemFormComponent = ({onClose,data,onSendData2}) => {
       const initialItemState = {
         itemName: "",
         price: "",
@@ -40,7 +40,7 @@ const ItemFormComponent = ({onClose,data,sendData}) => {
           }
     
         showSuccess("Added New Item Successfully");
-        sendData(data.customer)
+        onSendData2(data.customer)
         setnewItemdata(initialItemState);
         setTimeout(()=>{onClose();}, 1000)
         

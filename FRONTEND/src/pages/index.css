@@ -42,6 +42,19 @@ body {
   color: #6b7280;
   letter-spacing: 2px;
 }
+.no-customers{
+  font-size: 1.8rem;
+    font-weight: 300;
+  color: #6b7280;
+    height: 65vh;               /* takes most of page height */
+  display: flex;
+  justify-content: center;    /* horizontal center */
+  align-items: center;        /* vertical center */
+  text-align: center;
+  letter-spacing: 2px;
+
+
+}
 
 .user-details-project-title2 {
   font-size: 4.5rem;

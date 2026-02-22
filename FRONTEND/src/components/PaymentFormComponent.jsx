@@ -4,7 +4,7 @@ import "./customerform.css";
 import { showSuccess, showError } from "../toast";
 import { receivePaymentService } from '../fetch2';
 
-const PaymentFormComponent = ({onClose, sendData, data}) => {
+const PaymentFormComponent = ({onClose, onSendData2, data}) => {
 
  
 
@@ -37,7 +37,7 @@ const PaymentFormComponent = ({onClose, sendData, data}) => {
         return;
       }
       showSuccess("Payment received successfully");
-      sendData(data.customer);
+     onSendData2(data.customer);
       setnewPaymentdata(initialPaymentState);
       setTimeout(()=>{onClose();}, 1000)  
 
@@ -72,10 +72,12 @@ const PaymentFormComponent = ({onClose, sendData, data}) => {
             <select
                   value={newPaymentdata.via}
                   onChange={(e) => setnewPaymentdata({...newPaymentdata, via: e.target.value})}
-          >
+                  required
+                  >
               <option value="">Select Payment Mode</option>
               <option value="Cash">Cash</option>
               <option value="Online">Online</option>
+              
             </select>
 
 

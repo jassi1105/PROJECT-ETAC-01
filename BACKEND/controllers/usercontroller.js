@@ -68,6 +68,7 @@ const logoutUser = async (req, res) => {
 
 
 const getUserById = async (req, res) => {
+  if(!req.session.User_Id) return res.status(401).json({ error: "Unauthorized" });
   try {
     const is_user = await user.findById(req.params.userId).select("-password");
     if (!is_user) {
